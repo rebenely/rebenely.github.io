@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://unpkg.com/papercss@1.5.1/dist/paper.min.css">
+  <title>Baybayin</title>
+</head>
+<body>
+  <div class="paper container">
+    <h1 align="center">Baybayin <span class="badge secondary">Converter</span></h1> 
+    <div class="row flex-middle">
+        <div class="sm-6 col">
+            <div class="form-group">
+                <label>Modernong baybay</label>
+                <textarea class="no-resize input-block" placeholder="Baybayin"  id="modernSpelling" oninput="modernToBaybayin()"></textarea>
+            </div>
+            <button class="btn-block" onclick="copyToClp('modernSpelling')">Kopyahin</button>
+        </div>
+        <div class="sm-6 col">
+            <div class="form-group">
+                <label>Baybayin</label>
+                <textarea class="no-resize input-block" placeholder="ᜊᜌ᜔ᜊᜌᜒᜈ᜔" id="baybay" oninput="baybayinToModern()"></textarea>
+
+            </div>
+            <button class="btn-block" onclick="copyToClp('baybay')">Kopyahin</button>
+        </div>
+        <div class="alert alert-secondary" id="unsupportedDiv" style="display:none"><p align="center">May ilang mga titik na hindi suportado.</p></div>
+        
+        <div class="collapsible sm-12 col">
+        
+            <input id="collapsible1" type="checkbox" name="collapsible">
+            <label for="collapsible1">Show Baybayin Chart</label>
+            <div class="collapsible-body">
+                <div class="row ">
+                    <div class="sm-6 col">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Titik</th>
+                          <th>Base</th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>a</td>
+                          <td>ᜀ</td>
+             
+                        </tr>
+                        <tr>
+                          <td>e/i</td>
+                          <td>ᜁ</td>
+                        
+                        </tr>
+                        <tr>
+                          <td>o/u</td>
+                          <td>ᜂ</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="alert alert-secondary"><p align="center">Walang idaragdag kung ang kasunod ng katinig ay a. Magdagdag ng kudlit sa itaas ng katinig kapag ang kasunod nito ay e/i. Magdagdag ng kudlit sa ibaba ng katinig kapag ang kasunod nito ay o/u. Kapag ang katinig ay walang kasunod, magdagdag ng ekis sa ilalim nito. 
+                    </p> <p align="center">Halimbawa: ka - ᜃ, ki - ᜃᜒ, ku - ᜃᜓ, k - ᜃ᜔ </p></div>
+                    </div>
+                    <div class="sm-6 col">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Titik</th>
+                          <th>Base</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>b/v</td>
+                          <td>ᜊ</td>
+             
+                        </tr>
+                        <tr>
+                          <td>k</td>
+                          <td>ᜃ</td>
+            
+                        </tr>
+                        <tr>
+                          <td>d/r</td>
+                          <td>ᜇ</td>
+                        </tr>
+                        <tr>
+                          <td>f</td>
+                          <td>ᜉ</td>
+                        </tr>
+                        <tr>
+                          <td>g</td>
+                          <td>ᜄ</td>
+                        </tr>
+                        <tr>
+                          <td>h</td>
+                          <td>ᜑ</td>
+                        </tr>
+                        <tr>
+                          <td>l</td>
+                          <td>ᜎ</td>
+                        </tr>
+                        <tr>
+                          <td>m</td>
+                          <td>ᜋ</td>
+                        </tr>
+                        <tr>
+                          <td>n</td>
+                          <td>ᜈ</td>
+                        </tr>
+                        <tr>
+                          <td>p</td>
+                          <td>ᜉ</td>
+                        </tr>
+                        <tr>
+                          <td>s/z</td>
+                          <td>ᜐ</td>
+                        </tr>
+                        <tr>
+                          <td>t</td>
+                          <td>ᜆ</td>
+                        </tr>
+                        <tr>
+                          <td>w</td>
+                          <td>ᜏ</td>
+                        </tr>
+                         <tr>
+                          <td>y</td>
+                          <td>ᜌ</td>
+                        </tr>
+                        <tr>
+                          <td>ng</td>
+                          <td>ᜅ</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <h6 align="center" id='mouse_over'>Gawa ni rebenely sa araw ni Manuel L. Quezon. Gumamit ng PaperCSS.<h6>
+  </div>
+  
+  <style>
+#mouse_over {
+opacity: 0;
+}
+
+#mouse_over:hover {
+opacity: 1;
+}
+  </style>
+  <script>
+  
+  
+    function modernToBaybayin() {
+        var inputText = document.getElementById("modernSpelling").value;
+        var outputText = "";
+       
+        var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+ 
+       
+        var vowel = {'a' : 'ᜀ', 'e' : 'ᜁ', 'i' : 'ᜁ', 'o' : 'ᜂ' , 'u' : 'ᜂ'};
+        var consonant = { 'b' : 'ᜊ', 'k' : 'ᜃ', 'd' : 'ᜇ', 'f': 'ᜉ', 'g' : 'ᜄ', 'h' : 'ᜑ', 'l' : 'ᜎ', 'm' : 'ᜋ', 'n' : 'ᜈ', 'p' : 'ᜉ', 'r' : 'ᜇ', 's' : 'ᜐ', 't' : 'ᜆ', 'v' : 'ᜊ', 'w' : 'ᜏ', 'y' : 'ᜌ', 'z' : 'ᜐ' }
+        var supportedAll = true;
+        
+        for (var i = 0; i < inputText.length ; i++) {
+
+            var current = inputText.charAt(i);
+            var next = inputText.charAt(i+1);
+    
+            
+            console.log(current);
+            if(!(current in consonant) && !(current in vowel) && current !== ' ') {
+                supportedAll = false;     
+            }
+            
+            if (current in vowel) {
+                outputText += vowel[current];
+            } else { 
+                
+                if(current === 'n' && next === 'g') {
+                    outputText += 'ᜅ'; /// ng
+                    var nextChar = inputText.charAt(i+2);
+                    i += 1;
+                    if (nextChar === 'a') {
+                        // do nothing
+                        i += 1;
+                    } else if (nextChar === 'e' || nextChar === 'i') {
+                        outputText += 'ᜒ';
+                        i += 1;
+                    } else if (nextChar === 'o' || nextChar === 'u') {
+                        outputText += 'ᜓ';
+                        i += 1;
+                    } else { //consonant or space
+                        outputText +=  '᜔'; 
+                    }
+                } else {
+                    if(!(current in consonant)){
+                        outputText += current;
+                    } else {
+                        outputText += consonant[current];
+                        if (next === 'a') {
+                            // do nothing
+                            i += 1;
+                        } else if (next === 'e' || next === 'i') {
+                            outputText += 'ᜒ';
+                            i += 1;
+                        } else if (next === 'o' || next === 'u') {
+                            outputText += 'ᜓ';
+                            i += 1;
+                        } else { //consonant or space
+                            outputText +=  '᜔'; 
+                        }
+                    }
+                    
+                }
+                
+                
+            }
+        }
+        var x = document.getElementById("unsupportedDiv");
+        if(supportedAll) {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+        document.getElementById("baybay").value = outputText;
+
+    } 
+    function swap(json){
+        var ret = {};
+        for(var key in json){
+            ret[json[key]] = key;
+        }
+    return ret;
+    }
+     function baybayinToModern() {
+        var inputText = document.getElementById("baybay").value;
+        var outputText = "";
+       
+        var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+ 
+       
+        var vowel = {'a' : 'ᜀ', 'e' : 'ᜁ', 'i' : 'ᜁ', 'o' : '' , 'u' : 'ᜂ'};
+        vowel = swap(vowel);
+        var consonant = { 'b' : 'ᜊ', 'k' : 'ᜃ', 'd' : 'ᜇ', 'g' : 'ᜄ', 'h' : 'ᜑ', 'l' : 'ᜎ', 'm' : 'ᜋ', 'n' : 'ᜈ', 'p' : 'ᜉ', 's' : 'ᜐ', 't' : 'ᜆ', 'w' : 'ᜏ', 'y' : 'ᜌ', 'ng': 'ᜅ' }
+        consonant = swap(consonant);
+        
+        var supportedAll = true;
+            
+        for (var i = 0; i < inputText.length ; i++) {
+
+            var current = inputText.charAt(i);
+            var next = inputText.charAt(i+1);
+    
+            
+            console.log(current);
+            if(!(current in consonant) && !(current in vowel) && current !== ' ') {
+                supportedAll = false;     
+            }
+            
+            if (current in vowel) {
+                outputText += vowel[current];
+            } else {
+                if(!(current in consonant)){
+                    console.log(current + 'ayy' )
+                    outputText += current;
+                } else {
+                    console.log(current +' = '+consonant[current])
+                    outputText += consonant[current];
+                    if (next === 'ᜒ') {
+                        outputText += 'i';
+                        i += 1;
+                    } else if (next === 'ᜓ') {
+                        outputText += 'o';
+                        i += 1;
+                    } else if (next === '᜔') { //consonant or space
+                        outputText +=  ''; 
+                        i += 1;
+                    } else { 
+                        outputText += 'a';
+                    }
+                }
+            }
+            
+        }
+        var x = document.getElementById("unsupportedDiv");
+        if(supportedAll) {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+        document.getElementById("modernSpelling").value = outputText;
+
+    } 
+    function copyToClp(elementId) {
+      /* Get the text field */
+      var copyText = document.getElementById(elementId);
+
+      /* Select the text field */
+      copyText.select();
+
+      /* Copy the text inside the text field */
+      document.execCommand("copy");
+    } 
+  </script>
+</body>
+</html>
+
+
