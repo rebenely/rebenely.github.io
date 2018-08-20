@@ -159,6 +159,7 @@ opacity: 1;
   
     function modernToBaybayin() {
         var inputText = document.getElementById("modernSpelling").value;
+        inputText = inputText.toLowerCase();
         var outputText = "";
        
         var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
@@ -242,7 +243,7 @@ opacity: 1;
      function baybayinToModern() {
         var inputText = document.getElementById("baybay").value;
         var outputText = "";
-       
+        inputText = inputText.toLowerCase();
         var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
  
        
