@@ -21,7 +21,7 @@
         <div class="sm-6 col">
             <div class="form-group">
                 <label>Baybayin</label>
-                <textarea class="no-resize input-block shadow shadow-hover" placeholder="ᜊᜌ᜔ᜊᜌᜒᜈ᜔" id="baybay" oninput="baybayinToModern()"></textarea>
+                <textarea class="no-resize input-block shadow shadow-hover baybayin-display" placeholder="ᜊᜌ᜔ᜊᜌᜒᜈ᜔" id="baybay" oninput="baybayinToModern()"></textarea>
 
             </div>
             <button class="btn-block" onclick="copyToClp('baybay')">Kopyahin</button>
@@ -61,7 +61,7 @@
                       </tbody>
                     </table>
                     <div class="alert alert-secondary"><p align="center">Walang idaragdag kung ang kasunod ng katinig ay a. Magdagdag ng kudlit sa itaas ng katinig kapag ang kasunod nito ay e/i. Magdagdag ng kudlit sa ibaba ng katinig kapag ang kasunod nito ay o/u. Kapag ang katinig ay walang kasunod, magdagdag ng ekis sa ilalim nito. 
-                    </p> <p align="center">Halimbawa: ka - ᜃ, ki - ᜃᜒ, ku - ᜃᜓ, k - ᜃ᜔ </p></div>
+                    </p> <p align="center" class="paragraph-w-baybayin">Halimbawa: ka - <span>ᜃ</span>, ki - <span>ᜃᜒ</span>, ku - <span>ᜃᜓ</span>, k - <span>ᜃ᜔</span> </p></div>
                     </div>
                     <div class="sm-6 col">
                     <table>
@@ -143,6 +143,7 @@
         
     </div>
     <h6 align="center" id='mouse_over'>Gawa ni rebenely sa araw ni Manuel L. Quezon. Gumamit ng PaperCSS.<h6>
+    <h6 align="center" id='mouse_over'>Binisita muli sa sunod na taon, buwan din ng wika. Ang dumi ng code ko hahahahahah. Marami akong bagong natutunan mula noong gawin ko 'to.<h6>
   </div>
   
   <style>
@@ -152,7 +153,26 @@ opacity: 0;
 
 #mouse_over:hover {
 opacity: 1;
+}   
+
+@font-face {
+    font-family: 'noto';
+    src: url('NotoSansTagalog-Regular.ttf');
 }
+
+.baybayin-display {
+   font-family: 'noto'; 
+}
+
+td:nth-child(2) {
+    font-family: 'noto'; 
+}
+
+.paragraph-w-baybayin span {
+    font-family: 'noto'; 
+}
+
+
   </style>
   <script>
   
